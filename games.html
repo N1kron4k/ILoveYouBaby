@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Игры для Алины 💕</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: linear-gradient(145deg, #ffe6f0, #f3e6ff);
+            font-family: 'Montserrat', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: #682c4c;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 8px rgba(255, 160, 180, 0.3);
+            text-align: center;
+        }
+        .menu-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 30px;
+        }
+        .game-card {
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(8px);
+            border-radius: 60px;
+            padding: 25px 20px;
+            text-align: center;
+            border: 2px solid white;
+            box-shadow: 0 10px 30px rgba(255, 120, 180, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        .game-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(255, 120, 180, 0.4);
+        }
+        .game-emoji {
+            font-size: 4rem;
+            margin-bottom: 10px;
+        }
+        .game-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: #682c4c;
+            margin-bottom: 10px;
+        }
+        .game-description {
+            font-size: 1.2rem;
+            color: #4a2c3b;
+        }
+        .back-btn {
+            background: #ff8fbf;
+            border: 2px solid white;
+            padding: 12px 30px;
+            border-radius: 60px;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(255, 120, 180, 0.4);
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .back-btn:hover {
+            background: #ff77aa;
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(255, 120, 180, 0.6);
+        }
+        @media (max-width: 480px) {
+            h1 { font-size: 2.2rem; }
+            .game-title { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <h1>Выбери игру 💖</h1>
+    <div class="menu-container">
+        <a href="memory/index.html" class="game-card">
+            <div class="game-emoji">🎴</div>
+            <div class="game-title">Найди пару</div>
+            <div class="game-description">Собери все пары с нашими фото</div>
+        </a>
+        <a href="kiss/index.html" class="game-card">
+            <div class="game-emoji">💋</div>
+            <div class="game-title">Поймай поцелуй</div>
+            <div class="game-description">Лови поцелуи и слушай, как растёт страсть</div>
+        </a>
+    </div>
+    <a href="index.html" class="back-btn">🏠 На главную</a>
+</body>
+</html>

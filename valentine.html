@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Для Алины 💖</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Шрифты -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(145deg, #ffe6f0, #f3e6ff);
+      min-height: 100vh;
+      overflow-y: auto;
+      color: #4a2c3b;
+      position: relative;
+      animation: bgPulse 15s infinite alternate ease-in-out;
+    }
+
+    @keyframes bgPulse {
+      0% { background: linear-gradient(145deg, #ffe6f0, #f3e6ff); }
+      50% { background: linear-gradient(225deg, #ffe0f0, #f0e4ff); }
+      100% { background: linear-gradient(145deg, #ffe6f0, #f3e6ff); }
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background-image: radial-gradient(circle at 20% 30%, rgba(255,182,193,0.2) 2px, transparent 2px),
+                        radial-gradient(circle at 80% 70%, rgba(255,223,186,0.2) 1px, transparent 2px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .screen {
+      display: none;
+      min-height: 100vh;
+      width: 100vw;
+      padding: 20px;
+      text-align: center;
+      animation: fadeSlide 0.9s cubic-bezier(0.23, 1, 0.32, 1) both;
+      position: relative;
+      z-index: 2;
+    }
+
+    .screen.active {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    @keyframes fadeSlide {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .emoji-placeholder {
+      font-size: 120px;
+      margin-bottom: 20px;
+      text-shadow: 0 10px 25px rgba(255, 120, 160, 0.5);
+      animation: float 3.5s infinite ease-in-out, wobble 6s infinite;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
+    }
+
+    @keyframes wobble {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(5deg); }
+      75% { transform: rotate(-5deg); }
+    }
+
+    h1, h2 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      margin-bottom: 12px;
+      text-shadow: 3px 3px 6px rgba(255, 160, 180, 0.3);
+      animation: glow 4s infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 2px 2px 8px rgba(255, 120, 160, 0.3); }
+      to { text-shadow: 6px 6px 16px rgba(255, 100, 150, 0.6); }
+    }
+
+    h1 {
+      font-size: 34px;
+      color: #682c4c;
+    }
+
+    p {
+      font-size: 18px;
+      line-height: 1.7;
+      max-width: 380px;
+      margin-bottom: 20px;
+      font-weight: 500;
+      color: #3e2a35;
+    }
+
+    .message-card {
+      background: rgba(255, 220, 240, 0.7);
+      backdrop-filter: blur(8px);
+      padding: 25px 30px;
+      border-radius: 40px;
+      max-width: 450px;
+      margin-bottom: 25px;
+      box-shadow: 0 10px 30px rgba(255, 140, 200, 0.2);
+      border: 1px solid rgba(255,255,255,0.5);
+    }
+
+    button {
+      background: #ff8fbf;
+      border: none;
+      padding: 14px 34px;
+      border-radius: 50px;
+      font-size: 18px;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(255, 143, 199, 0.5);
+      transition: all 0.25s ease;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      border: 1px solid rgba(255,255,255,0.4);
+      backdrop-filter: blur(5px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    button:hover {
+      background: #ff77aa;
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 16px 30px rgba(255, 120, 180, 0.7);
+    }
+
+    button::after {
+      content: '✨';
+      position: absolute;
+      top: -20px;
+      left: -20px;
+      opacity: 0;
+      font-size: 20px;
+      transition: all 0.3s;
+    }
+
+    button:hover::after {
+      opacity: 0.7;
+      top: -10px;
+      left: 90%;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-top: 15px;
+    }
+
+    .buttons button:first-child {
+      animation: pulse 1.8s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+      100% { transform: scale(1); }
+    }
+
+    #noBtn {
+      background: #b38cff;
+      position: static;
+      transition: none;
+    }
+
+    .angry {
+      font-size: 48px;
+      font-weight: 700;
+      color: #e6395a;
+      margin-bottom: 25px;
+      font-family: 'Playfair Display', serif;
+      text-shadow: 4px 4px 0 #ffe0e8;
+    }
+
+    .promise-list {
+      text-align: left;
+      background: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(8px);
+      padding: 25px 35px;
+      border-radius: 30px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+      margin-bottom: 20px;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .promise-item {
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 17px;
+      font-weight: 500;
+      animation: slideIn 0.5s ease;
+    }
+
+    .promise-item::before {
+      content: "💝";
+      font-size: 22px;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(-10px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    .heart, .confetti {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    .heart {
+      top: -30px;
+      animation: fall linear forwards;
+    }
+
+    @keyframes fall {
+      to { transform: translateY(110vh); opacity: 0; }
+    }
+
+    .confetti {
+      font-size: 24px;
+      animation: explode 1.5s ease-out forwards;
+    }
+
+    @keyframes explode {
+      0% { opacity: 1; transform: translate(0, 0) rotate(0deg); }
+      100% { opacity: 0; transform: translate(var(--dx), var(--dy)) rotate(360deg); }
+    }
+
+    .random-love {
+      background: transparent;
+      border: 2px dashed #ff8fbf;
+      color: #682c4c;
+      box-shadow: none;
+      margin-top: 20px;
+      padding: 10px 28px;
+      font-weight: 500;
+    }
+
+    .random-love:hover {
+      background: #ffe6f0;
+      border: 2px solid #ff8fbf;
+    }
+
+    /* Секретная кнопка */
+    .secret-btn {
+      background: transparent;
+      border: none;
+      font-size: 28px;
+      cursor: pointer;
+      padding: 5px;
+      margin-top: 5px;
+      opacity: 0.5;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+
+    .secret-btn:hover {
+      opacity: 1;
+      transform: scale(1.2);
+    }
+
+    #secretMessage {
+      margin-top: 10px;
+      font-size: 18px;
+      color: #a1325e;
+      font-style: italic;
+      background: rgba(255, 220, 240, 0.5);
+      padding: 8px 18px;
+      border-radius: 30px;
+      backdrop-filter: blur(3px);
+      animation: fadeInMsg 0.5s ease;
+    }
+
+    #randomMessage {
+      margin-top: 20px;
+      font-style: italic;
+      min-height: 30px;
+      font-size: 18px;
+      color: #5a3d4a;
+      background: rgba(255,255,255,0.3);
+      padding: 12px 24px;
+      border-radius: 40px;
+      backdrop-filter: blur(3px);
+      animation: fadeInMsg 0.5s ease;
+    }
+
+    @keyframes fadeInMsg {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    /* Кнопка "Главный экран" в углу последнего экрана */
+    .home-corner-btn {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(5px);
+      padding: 8px 16px;
+      border-radius: 40px;
+      border: 2px solid white;
+      color: #682c4c;
+      font-size: 1rem;
+      font-weight: 500;
+      text-decoration: none;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: all 0.2s;
+      z-index: 100;
+    }
+    .home-corner-btn:hover {
+      background: white;
+      transform: scale(1.05);
+    }
+    @media (max-width: 768px) {
+      .home-corner-btn {
+        top: 10px;
+        left: 10px;
+        font-size: 0.9rem;
+        padding: 6px 12px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      h1 { font-size: 28px; }
+      p { font-size: 16px; max-width: 300px; }
+      .emoji-placeholder { font-size: 80px; }
+      .promise-list { padding: 18px 20px; }
+      .message-card { padding: 20px; }
+      .secret-btn { font-size: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ЭКРАН 1: Приветствие -->
+  <div class="screen active" data-screen="0">
+    <div class="emoji-placeholder">💌</div>
+    <h1>Привет, Алина 💖</h1>
+    <p>Я сделал для тебя маленький мир, где живёт моя любовь.</p>
+    <button onclick="next()">Войти ✨</button>
+  </div>
+
+  <!-- ЭКРАН 2: Ты — мой уют -->
+  <div class="screen" data-screen="1">
+    <div class="emoji-placeholder">🫂</div>
+    <h1>Ты — мой уют</h1>
+    <p>С тобой даже самый серый день становится акварельным.</p>
+    <button onclick="next()">Дальше 💌</button>
+  </div>
+
+  <!-- ЭКРАН 3: Ты — мой выбор -->
+  <div class="screen" data-screen="2">
+    <div class="emoji-placeholder">🌷</div>
+    <h1>Ты — мой выбор</h1>
+    <p>Снова и снова, в тишине и в шуме — я выбираю тебя.</p>
+    <button onclick="next()">Ещё 🫶</button>
+  </div>
+
+  <!-- ЭКРАН 4: Обещания (5 пунктов) -->
+  <div class="screen" data-screen="3">
+    <div class="emoji-placeholder">📜</div>
+    <h1>Я обещаю</h1>
+    <div class="promise-list">
+      <div class="promise-item">Быть твоим утром</div>
+      <div class="promise-item">Слушать даже молчание</div>
+      <div class="promise-item">Удивлять без повода</div>
+      <div class="promise-item">Любить без условий</div>
+      <div class="promise-item">И всегда быть рядом</div>
+    </div>
+    <button onclick="next()">Я верю 💖</button>
+  </div>
+
+  <!-- ЭКРАН 5: Вопрос -->
+  <div class="screen" id="questionScreen" data-screen="4">
+    <div class="emoji-placeholder">🥺💘</div>
+    <h1>Ты будешь моей валентинкой? 💖</h1>
+    <div class="buttons">
+      <button onclick="goToFinal()">Да 🥰</button>
+      <button id="noBtn" onclick="noClicked()">Нет 😈</button>
+    </div>
+  </div>
+
+  <!-- ЭКРАН 6: НЕЛЬЗЯ НАХУЙ!!! -->
+  <div class="screen" data-screen="5">
+    <div class="angry">💢 НЕЛЬЗЯ НАХУЙ!!! 💢</div>
+    <button onclick="next()">Оойойой😳</button>
+  </div>
+
+  <!-- ЭКРАН 7: Только правильные ответы -->
+  <div class="screen" data-screen="6">
+    <h1>Попробуем ещё раз 😌</h1>
+    <div class="buttons">
+      <button onclick="goToFinal()">Да 💖</button>
+      <button onclick="goToFinal()">Да конечно 🥰</button>
+    </div>
+  </div>
+
+  <!-- ========== ФИНАЛ (5 ЧАСТЕЙ) ========== -->
+
+  <!-- ЭКРАН 8 (индекс 7): Я знал + вступление -->
+  <div class="screen" data-screen="7">
+    <div class="emoji-placeholder">😏💖</div>
+    <h1>Я знал</h1>
+    <div class="message-card">
+      <p style="font-size: 22px; margin-bottom: 5px;">А теперь, моя любимая,</p>
+      <p style="font-size: 26px; font-weight: 700; color: #b34167;">мои поздравления...</p>
+    </div>
+    <button onclick="next()">Слушать дальше 💌</button>
+  </div>
+
+  <!-- ЭКРАН 9 (индекс 8): Часть 1 -->
+  <div class="screen" data-screen="8">
+    <div class="emoji-placeholder">💖</div>
+    <div class="message-card">
+      <p style="font-size: 20px;">Алина, ты — самое прекрасное, что случалась со мной. Спасибо, что ты у меня есть.</p>
+    </div>
+    <button onclick="next()">Дальше ✨</button>
+  </div>
+
+  <!-- ЭКРАН 10 (индекс 9): Часть 2 -->
+  <div class="screen" data-screen="9">
+    <div class="emoji-placeholder">🥰</div>
+    <div class="message-card">
+      <p style="font-size: 20px;">Твоя доброта, твой смех, твои глаза — всё в тебе заставляет моё сердце биться чаще.</p>
+    </div>
+    <button onclick="next()">Дальше 💕</button>
+  </div>
+
+  <!-- ЭКРАН 11 (индекс 10): Часть 3 -->
+  <div class="screen" data-screen="10">
+    <div class="emoji-placeholder">🦋</div>
+    <div class="message-card">
+      <p style="font-size: 20px;">Рядом с тобой я чувствую себя сильным и нужным. Ты вдохновляешь меня становиться лучше каждый день.</p>
+    </div>
+    <button onclick="next()">Дальше 🌷</button>
+  </div>
+
+  <!-- ЭКРАН 12 (индекс 11): Часть 4 -->
+  <div class="screen" data-screen="11">
+    <div class="emoji-placeholder">🤝</div>
+    <div class="message-card">
+      <p style="font-size: 20px;">Обещаю беречь тебя, ценить каждую минуту и никогда не давать усомниться в моей любви.</p>
+    </div>
+    <button onclick="next()">Дальше 💫</button>
+  </div>
+
+  <!-- ЭКРАН 13 (индекс 12): Часть 5 + кнопки + СЕКРЕТ + Главный экран -->
+  <div class="screen" data-screen="12" id="finalPartScreen">
+    <!-- Кнопка "Главный экран" в левом верхнем углу -->
+   <a href="index.html" onclick="localStorage.setItem('valentineCompleted', 'true')" class="home-corner-btn">🏠 Главный экран</a>
+
+    <div class="emoji-placeholder">💘</div>
+    <div class="message-card">
+      <p style="font-size: 22px; font-weight: 600;">Ты — моё чудо, моя гордость, моя девочка.</p>
+      <p style="font-size: 24px; margin-top: 15px; color: #a1325e;">Навсегда твой Никитка (Жинкин Лэв) 💕</p>
+    </div>
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 15px; margin-top: 10px;">
+      <button onclick="confettiExplosion()">🎁 Сюрприз (сердечки + фейерверк)</button>
+      <button class="random-love" onclick="showRandomLove()">💬 Ещё признание</button>
+      <button class="secret-btn" onclick="showSecret()" title="Секретик">🎀</button>
+      <div id="secretMessage"></div>
+      <div id="randomMessage"></div>
+    </div>
+  </div>
+
+  <script>
+    // ==================== НАСТРОЙКИ ====================
+    const HEART_TYPES = ['💖', '❤️', '💕', '💗', '💓', '💞'];
+    const loveMessages = [
+      "Я люблю тебя. Без 'но', без условий, без намёков — просто люблю.",
+      "Ты — причина моей улыбки ☀️",
+      "Ты мой любимый человек. Самый-самый.",
+      "С тобой я дома — в самом безопасном месте на земле.",
+      "Твоё имя — моё любимое слово. Я шепчу его, когда мне хорошо и когда мне нужно успокоиться.",
+      "Если бы я мог, я бы подарил тебе все звёзды. Но у меня есть только я — и я твой целиком.",
+      "Ты — мой самый лучший день. Каждый день с тобой — праздник.",
+      "В моём сердце только одно место, и оно занято тобой. Прописка вечная.",
+      "Ты — моё утро, мой день, моя ночь. Я засыпаю с мыслями о тебе и просыпаюсь с улыбкой, потому что ты есть.",
+      "Рядом с тобой даже тишина звучит музыкой.",
+      "Ты делаешь этот мир лучше просто тем, что существуешь. Спасибо, что ты родилась.",
+      "Мне не нужен рай, если ты рядом. Ты и есть мой рай.",
+      "Ты — моё вдохновение. Всё красивое, что я делаю — ради тебя и благодаря тебе.",
+      "Спасибо, что выбрала меня. Я никогда не устану это повторять.",
+      "Твои глаза — мой любимый цвет. Я могу смотреть в них вечность.",
+      "Я хочу стареть с тобой. Держать тебя за руку, когда нам будет по восемьдесят, и улыбаться, вспоминая этот день.",
+      "Ты — лучшее, что случилось со мной. До тебя был сон, после тебя — реальность.",
+      "Обнимать тебя — как возвращаться домой после долгой дороги.",
+      "Ты — мой талисман, моя удача, моё спокойствие.",
+      "Никто не смешит меня так, как ты. Твой смех — лучшее лекарство.",
+      "С тобой я могу быть настоящим. Не бояться показаться глупым, слабым, странным. Ты принимаешь меня целиком.",
+      "Ты — моя самая любимая привычка. И самая сладкая зависимость.",
+      "Я люблю даже твои странности. Особенно их.",
+      "Ты — причина, по которой я верю в любовь. До тебя я не знал, что так бывает.",
+      "Каждый день с тобой — маленькое чудо. Я учусь замечать его и благодарить судьбу.",
+      "Ты — моя опора и моя свобода. С тобой я не боюсь мечтать.",
+      "Я выбираю тебя. Сегодня, завтра, всегда. Снова и снова — только тебя.",
+      "Ты — моя валентинка навсегда. Не только 14 февраля, а 365 дней в году.",
+      "Не переставай улыбаться — это моё счастье. Твоя улыбка освещает всё вокруг.",
+      "Ты — лучшее, что у меня есть. И я никогда не перестану это чувствовать.",
+      "Я тебя очень сильно люблю. Это просто факт. Самый главный факт в моей жизни.",
+      "Ты — моя единственная. Та, которую я ждал, даже когда не знал об этом.",
+      "Люблю тебя целиком, со всем, что в тебе есть. С твоими мечтами, страхами, привычками. Всё это — ты, и всё это прекрасно.",
+      "Ты — самое важное решение в моей жизни. И я ни разу не усомнился.",
+      "Я люблю тебя. Без дат, без поводов, без конца. Просто потому что ты — это ты.",
+      "Ты делаешь меня лучше. Рядом с тобой я хочу расти и развиваться, чтобы быть достойным тебя.",
+      "Каждая минута без тебя — потраченная зря минута.",
+      "Ты — моя мечта, которая стала реальностью.",
+      "Когда ты рядом, всё остальное теряет значение. Есть только ты и я.",
+      "Ты — самое нежное, что есть в моей жизни. Я буду беречь тебя, обещаю.",
+      "Твои руки — моё любимое место. В них я чувствую себя в безопасности.",
+      "Ты — мой личный герой. Сильная, нежная, умная, красивая — ты удивительная.",
+      "Спасибо, что ты есть. За твой голос, за твой взгляд, за то, как ты произносишь моё имя.",
+      "Я хочу быть с тобой не потому, что не могу без тебя, а потому что с тобой я хочу быть всегда.",
+      "Ты — мой компас. Куда бы я ни пошёл, я всегда хочу вернуться к тебе.",
+      "Ты — мой самый любимый человек на всей планете. И я хочу, чтобы ты это знала каждую секунду.",
+      "Обожаю тебя. Всей душой, всем сердцем, каждой клеточкой.",
+      "Ты — моё вчера, моё сегодня и моё завтра. Вся моя жизнь — это ты."
+    ];
+
+    const MAX_NO_ATTEMPTS = 7;
+    const NO_PHRASES = [
+      'Нет 😈',
+      'Не выйдет! 😤',
+      'Отстань! 🙅',
+      'Ну пожалуйста? 🥺',
+      'Может, да? 🤔',
+      'Давай не надо… 😬',
+      'Ладно, сдаюсь… 😅'
+    ];
+
+    const screens = document.querySelectorAll('.screen');
+    let current = 0;
+
+    // ---------- ПРИВЕТСТВИЕ ПО ВРЕМЕНИ СУТОК ----------
+    function setGreeting() {
+      const hour = new Date().getHours();
+      let greeting = '';
+      if (hour < 12) greeting = 'Доброе утро';
+      else if (hour < 18) greeting = 'Добрый день';
+      else greeting = 'Добрый вечер';
+      const header = document.querySelector('.screen.active h1');
+      if (header) header.textContent = `${greeting}, Алина 💖`;
+    }
+
+    // ---------- КНОПКА "НЕТ" ----------
+    const noBtn = document.getElementById('noBtn');
+    let noAttempts = 0;
+    let noBtnSurrendered = false;
+
+    function moveNoBtn() {
+      if (noBtnSurrendered) return;
+      if (noAttempts < MAX_NO_ATTEMPTS) {
+        noAttempts++;
+        if (noAttempts <= NO_PHRASES.length) {
+          noBtn.textContent = NO_PHRASES[noAttempts - 1];
+        }
+      }
+      if (noAttempts >= MAX_NO_ATTEMPTS) {
+        noBtnSurrendered = true;
+        noBtn.textContent = NO_PHRASES[NO_PHRASES.length - 1];
+        noBtn.removeEventListener('mouseenter', moveNoBtn);
+        noBtn.removeEventListener('touchstart', moveNoBtn);
+        return;
+      }
+      noBtn.style.position = 'fixed';
+      const maxX = window.innerWidth - noBtn.offsetWidth - 20;
+      const maxY = window.innerHeight - noBtn.offsetHeight - 20;
+      const x = Math.min(Math.max(10, Math.random() * maxX), maxX);
+      const y = Math.min(Math.max(10, Math.random() * maxY), maxY);
+      noBtn.style.left = x + 'px';
+      noBtn.style.top = y + 'px';
+    }
+
+    function resetNoButton() {
+      noAttempts = 0;
+      noBtnSurrendered = false;
+      noBtn.textContent = NO_PHRASES[0];
+      noBtn.style.position = 'static';
+      noBtn.style.left = '';
+      noBtn.style.top = '';
+    }
+
+    function noClicked() {
+      if (noBtnSurrendered || noAttempts >= MAX_NO_ATTEMPTS) {
+        screens[current].classList.remove('active');
+        current = 5;
+        screens[current].classList.add('active');
+      }
+    }
+
+    // ---------- ПЕРЕКЛЮЧЕНИЕ ЭКРАНОВ ----------
+    function next() {
+      if (current < screens.length - 1) {
+        screens[current].classList.remove('active');
+        current++;
+        screens[current].classList.add('active');
+        if (current === 4) resetNoButton();
+      }
+    }
+
+    function goToFinal() {
+      screens[current].classList.remove('active');
+      current = 7;
+      screens[current].classList.add('active');
+    }
+
+    // ---------- СЕРДЕЧКИ ----------
+    let heartInterval = null;
+    function startHearts() {
+      if (heartInterval) clearInterval(heartInterval);
+      heartInterval = setInterval(createHeart, 150);
+    }
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.innerText = HEART_TYPES[Math.floor(Math.random() * HEART_TYPES.length)];
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = 2 + Math.random() * 3 + 's';
+      heart.style.fontSize = 16 + Math.random() * 20 + 'px';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 5000);
+    }
+
+    // ---------- ФЕЙЕРВЕРК ----------
+    function confettiExplosion() {
+      startHearts();
+      const centerX = window.innerWidth / 2;
+      const centerY = window.innerHeight / 2;
+      for (let i = 0; i < 80; i++) {
+        setTimeout(() => createConfetti(centerX, centerY), i * 8);
+      }
+    }
+    function createConfetti(centerX, centerY) {
+      const conf = document.createElement('div');
+      conf.className = 'confetti';
+      conf.innerText = ['✨', '🦄', '💖', '🌸', '⭐', '🎀', '🌺', '💫'][Math.floor(Math.random() * 8)];
+      conf.style.position = 'fixed';
+      conf.style.left = centerX + 'px';
+      conf.style.top = centerY + 'px';
+      conf.style.fontSize = 20 + Math.random() * 30 + 'px';
+      conf.style.color = `hsl(${Math.random() * 360}, 80%, 70%)`;
+      conf.style.zIndex = 10000;
+      const dx = (Math.random() - 0.5) * 600;
+      const dy = (Math.random() - 0.5) * 600 - 200;
+      conf.style.setProperty('--dx', dx + 'px');
+      conf.style.setProperty('--dy', dy + 'px');
+      document.body.appendChild(conf);
+      setTimeout(() => conf.remove(), 2000);
+    }
+
+    // ---------- СЛУЧАЙНОЕ ПРИЗНАНИЕ ----------
+    function showRandomLove() {
+      document.getElementById('randomMessage').textContent = '💌 ' + loveMessages[Math.floor(Math.random() * loveMessages.length)];
+    }
+
+    // ---------- СЕКРЕТНАЯ КНОПКА ----------
+    function showSecret() {
+      document.getElementById('secretMessage').textContent = 'И кстати, ты бидоська) 💕';
+    }
+
+    // ---------- ИНИЦИАЛИЗАЦИЯ ----------
+    window.onload = function() {
+      setGreeting();
+      if (noBtn) {
+        noBtn.addEventListener('mouseenter', moveNoBtn);
+        noBtn.addEventListener('touchstart', moveNoBtn, { passive: true });
+      }
+    };
+  </script>
+</body>
+</html>

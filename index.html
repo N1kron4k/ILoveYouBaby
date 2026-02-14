@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Для Алины 💖</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: linear-gradient(145deg, #ffe6f0, #f3e6ff);
+            font-family: 'Montserrat', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: #682c4c;
+            margin-bottom: 40px;
+            text-shadow: 2px 2px 8px rgba(255, 160, 180, 0.3);
+            text-align: center;
+        }
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 100%;
+            max-width: 300px;
+        }
+        .main-btn {
+            background: #ff8fbf;
+            border: 2px solid white;
+            padding: 15px 30px;
+            border-radius: 60px;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(255, 120, 180, 0.4);
+            transition: all 0.2s;
+            text-align: center;
+            text-decoration: none;
+            display: block;
+        }
+        .main-btn:hover {
+            background: #ff77aa;
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(255, 120, 180, 0.6);
+        }
+        .secondary-btn {
+            background: #b38cff;
+            border: 2px solid white;
+            padding: 15px 30px;
+            border-radius: 60px;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(255, 120, 180, 0.4);
+            transition: all 0.2s;
+            text-align: center;
+            text-decoration: none;
+            display: block;
+        }
+        .secondary-btn:hover {
+            background: #a175e0;
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(255, 120, 180, 0.6);
+        }
+        .hidden {
+            display: none;
+        }
+        @media (max-width: 480px) {
+            h1 { font-size: 2.2rem; }
+            .main-btn, .secondary-btn { font-size: 1.3rem; }
+        }
+    </style>
+</head>
+<body>
+    <h1>Для Алины 💖</h1>
+    <div class="button-container">
+        <a href="valentine.html" class="main-btn">Валентинка</a>
+        <a href="games.html" class="secondary-btn hidden" id="playBtn">Поиграем?</a>
+    </div>
+
+    <script>
+        if (localStorage.getItem('valentineCompleted') === 'true') {
+            document.getElementById('playBtn').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
